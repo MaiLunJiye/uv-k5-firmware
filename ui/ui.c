@@ -28,7 +28,11 @@
 #include "ui/fmradio.h"
 #include "ui/inputbox.h"
 #include "ui/main.h"
+#if defined(ENABLE_HORIZONTAL_MENU)
+#include "ui/menu_h.h"
+#else
 #include "ui/menu.h"
+#endif
 #include "ui/scanner.h"
 #include "ui/ui.h"
 

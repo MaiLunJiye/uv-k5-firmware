@@ -56,7 +56,11 @@
 #endif
 #include "ui/battery.h"
 #include "ui/inputbox.h"
+#if defined(ENABLE_HORIZONTAL_MENU)
+#include "ui/menu_h.h"
+#else
 #include "ui/menu.h"
+#endif
 #include "ui/rssi.h"
 #include "ui/status.h"
 #include "ui/ui.h"

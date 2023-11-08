@@ -35,7 +35,11 @@
 #include "sram-overlay.h"
 #endif
 #include "ui/inputbox.h"
+#if defined(ENABLE_HORIZONTAL_MENU)
+#include "ui/menu_h.h"
+#else
 #include "ui/menu.h"
+#endif
 #include "ui/ui.h"
 
 static const VOICE_ID_t MenuVoices[] = {
