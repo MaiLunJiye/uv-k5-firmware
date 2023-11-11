@@ -28,7 +28,7 @@
 #include "ui/fmradio.h"
 #include "ui/inputbox.h"
 #include "ui/main.h"
-#if defined(ENABLE_HORIZONTAL_MENU)
+#if defined(BD7PPW_FRMWARE)
 #include "ui/menu_h.h"
 #else
 #include "ui/menu.h"

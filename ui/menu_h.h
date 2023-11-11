@@ -1,4 +1,4 @@
-/* Copyright 2023 Dual Tachyon
+/* Copyright 2023 BD7PPW
  * https://github.com/MaiLunjiye
  *
  * Licensed under the Apache License, Version 2.0 (the "License");

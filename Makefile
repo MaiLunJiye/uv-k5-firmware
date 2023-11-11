@@ -9,7 +9,7 @@ ENABLE_SWD := 0
 ENABLE_TX1750 := 1
 ENABLE_UART := 1
 
-ENABLE_HORIZONTAL_MENU := 1
+BD7PPW_FRMWARE := 1
 
 BSP_DEFINITIONS := $(wildcard hardware/*/*.def)
 BSP_HEADERS := $(patsubst hardware/%,bsp/%,$(BSP_DEFINITIONS))
@@ -73,7 +73,12 @@ OBJS += audio.o
 OBJS += bitmaps.o
 OBJS += board.o
 OBJS += dcs.o
+ifeq ($(BD7PPW_FRMWARE),1)
+OBJS += font/font_base.o
+OBJS += font/font_zh_cn.o
+else
 OBJS += font.o
+endif
 OBJS += frequencies.o
 OBJS += functions.o
 OBJS += helper/battery.o
@@ -93,7 +98,7 @@ OBJS += ui/helper.o
 OBJS += ui/inputbox.o
 OBJS += ui/lock.o
 OBJS += ui/main.o
-ifeq ($(ENABLE_HORIZONTAL_MENU),1)
+ifeq ($(BD7PPW_FRMWARE),1)
 OBJS += ui/menu_h.o
 else
 OBJS += ui/menu.o
@@ -152,8 +157,8 @@ endif
 ifeq ($(ENABLE_UART),1)
 CFLAGS += -DENABLE_UART
 endif
-ifeq ($(ENABLE_HORIZONTAL_MENU),1)
-CFLAGS += -DENABLE_HORIZONTAL_MENU
+ifeq ($(BD7PPW_FRMWARE),1)
+CFLAGS += -DBD7PPW_FRMWARE
 endif
 LDFLAGS = -mcpu=cortex-m0 -nostartfiles -Wl,-T,firmware.ld
 

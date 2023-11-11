@@ -18,7 +18,11 @@
 #include "driver/backlight.h"
 #include "misc.h"
 #include "ui/battery.h"
+#if defined(BD7PPW_FRMWARE)
+#include "ui/menu_h.h"
+#else
 #include "ui/menu.h"
+#endif
 #include "ui/ui.h"
 
 uint16_t gBatteryCalibration[6];

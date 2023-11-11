@@ -1,4 +1,4 @@
-/* Copyright 2023 Dual Tachyon
+/* Copyright 2023 BD7PPW
  * https://github.com/MaiLunjiye
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,8 +25,9 @@
 #include "settings.h"
 #include "ui/helper.h"
 #include "ui/inputbox.h"
-#include "ui/menu.h"
+#include "ui/menu_h.h"
 #include "ui/ui.h"
+#include "font/font_zh_cn.h"
 
 static const char MenuList[][7] = {
 	// 0x00
@@ -186,14 +187,19 @@ void UI_DisplayMenu(void)
 
 	memset(gFrameBuffer, 0, sizeof(gFrameBuffer));
 
-    // Title
-    UI_PrintString(MenuList[gMenuCursor], 0, 127, 0, 8, true);
-    
-    // horizontal line
-    for (i = 0; i < 128; i++) {
-        gFrameBuffer[1][i] |= 0x80;
+	// Title
+    if (gMenuCursor == MENU_SQL) {
+        int x = 30;
+        UI_Display_ZH_CN(ZH_CN_静, x, 0);
+    } else {
+        UI_PrintString(MenuList[gMenuCursor], 0, 127, 0, 8, true);
     }
-
+			
+    // horizontal line
+	for (i = 0; i < 128; i++) {
+		gFrameBuffer[1][i] |= 0x80;
+	}
+	
     // MENU index
 	NUMBER_ToDigits(gMenuCursor + 1, String);
 	UI_DisplaySmallDigits(2, String + 6, 0, 0);
@@ -243,7 +249,7 @@ void UI_DisplayMenu(void)
 		strcpy(String, gSubMenu_SFT_D[gSubMenuSelection]);
 		break;
 
-	case MENU_W_N:
+		case MENU_W_N:
 		strcpy(String, gSubMenu_W_N[gSubMenuSelection]);
 		break;
 
@@ -362,7 +368,7 @@ void UI_DisplayMenu(void)
 		strcpy(String, gSubMenu_PTT_ID[gSubMenuSelection]);
 		break;
 
-	case MENU_PONMSG:
+		case MENU_PONMSG:
 		strcpy(String, gSubMenu_PONMSG[gSubMenuSelection]);
 		break;
 
@@ -437,20 +443,20 @@ void UI_DisplayMenu(void)
 			UI_PrintString(gEeprom.DTMF_DOWN_CODE + 8, 50, 127, 4, 8, true);
 		}
 	}
-
+	
 
 	if (gMenuCursor == MENU_D_LIST) {
 		gIsDtmfContactValid = DTMF_GetContact((uint8_t)gSubMenuSelection - 1, Contact);
 		if (!gIsDtmfContactValid) {
-            UI_PrintString("NULL", 0, 127, 4, 8, true);
+UI_PrintString("NULL", 0, 127, 4, 8, true);
 		} else {
 			memcpy(String, Contact, 8);
             UI_PrintString(String, 0, 127, 2, 8, true);
-            Contact[11] = 0;
-            memcpy(&gDTMF_ID, Contact + 8, 4);
-            sprintf(String, "ID:%s", Contact + 8);
-            UI_PrintString(String, 0, 127, 4, 8, true);
-		}
+		Contact[11] = 0;
+		memcpy(&gDTMF_ID, Contact + 8, 4);
+		sprintf(String, "ID:%s", Contact + 8);
+		UI_PrintString(String, 0, 127, 4, 8, true);
+}
 	}
 
 	if (gMenuCursor == MENU_R_CTCS || gMenuCursor == MENU_T_CTCS ||

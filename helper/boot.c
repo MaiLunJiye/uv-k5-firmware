@@ -24,7 +24,11 @@
 #include "misc.h"
 #include "radio.h"
 #include "settings.h"
+#if defined(BD7PPW_FRMWARE)
+#include "ui/menu_h.h"
+#else
 #include "ui/menu.h"
+#endif
 #include "ui/ui.h"
 
 BOOT_Mode_t BOOT_GetMode(void)
